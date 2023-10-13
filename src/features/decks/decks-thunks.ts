@@ -3,6 +3,7 @@ import { decksAPI, UpdateDeckParams } from './decks-api.ts'
 import { addDeckAC, deleteDeckAC, setDecksAC, updateDeckAC } from './decks-reducer.ts'
 import { setAppStatus } from '../../app/app-reducer'
 import { isAxiosError } from 'axios'
+import { handleError } from '../../common/utils/handle-error'
 
 /*export const fetchDecksTC = () => (dispatch: Dispatch) => {
   decksAPI.fetchDecks().then((res) => {
@@ -37,8 +38,8 @@ export const updateDeckTC = (params: UpdateDeckParams) => async (dispatch: Dispa
     const res = await decksAPI.updateDeck(params)
     dispatch(updateDeckAC(res.data))
   } catch (e) {
-
-    let errorMessage = ''
+    handleError(e,dispatch)
+    /*let errorMessage = ''
     if (isAxiosError<ServerError>(e)) {
       //throw new Error('BOOM')
       //case 1 ошибка запроса(приходит с бэкенда) axios создает объект ошибки, в response.data  помещает ответ сервера
@@ -51,16 +52,16 @@ export const updateDeckTC = (params: UpdateDeckParams) => async (dispatch: Dispa
       //case 3 ошибка вне запроса-генерируется js-имеет поле message
       errorMessage = (e as Error).message
       console.log(errorMessage)
-    }
+    }*/
   }
 }
 
-type ServerError = {
+/*type ServerError = {
   errorMessages: Array<{
     message: string,
     field: string
   }>
-}
+}*/
 
 /*
 "errorMessages": [
